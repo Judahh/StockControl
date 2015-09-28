@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<ui:define name="pageTitle">Gerenciador</ui:define>
+<ui:define name="pageHeader">Gerenciador</ui:define>
+<h:head></h:head>
+<h:body>
+	<h:form id="formManager">
+
+		<p:dataTable value="#{viewStockManager.stock.item}" var="singleItem" editable="true" editMode="cell">
+			<f:facet name="header">
+				<p:outputPanel>
+					<h:outputText value="#{msgs.manager}" />
+				</p:outputPanel>
+			</f:facet>
+			<f:facet name="header">
+				<h:outputText value="#{msgs.itemName}" />
+				<h:inputText id="itemName" label="#{msgs.itemName}"
+					value="#{item.name}" />
+				<h:outputText value="#{msgs.itemCategory}" />
+				<h:inputText id="itemCategory" label="#{msgs.itemCategory}"
+					value="#{item.category}" />
+				<h:outputText value="#{msgs.itemQuantity}" />
+				<h:inputText id="itemQuantity" label="#{msgs.itemQuantity}"
+					value="#{item.quantity}" />
+				<h:commandButton type="submit" value="#{msgs.itemSubmit}"
+					action="#{viewStockManager.addItem(item.name,item.category,item.quantity)}" />
+			</f:facet>
+			<p:column filterBy="#{singleItem.name}" filterEvent="onchange"
+				filterMatchMode="contains" headerText="#{msgs.itemName}">
+				<p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{singleItem.name}" /></f:facet>
+                  <f:facet name="input"><p:inputText id="nameInput" value="#{singleItem.name}" style="width:96%"/></f:facet>
+              	</p:cellEditor>
+			</p:column>
+			<p:column filterBy="#{singleItem.category}" filterEvent="onchange"
+				filterMatchMode="contains" headerText="#{msgs.itemCategory}">
+				<p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{singleItem.category}" /></f:facet>
+                  <f:facet name="input"><p:inputText id="categoryInput" value="#{singleItem.category}" style="width:96%"/></f:facet>
+              	</p:cellEditor>
+			</p:column>
+			<p:column filterBy="#{singleItem.quantity}" filterEvent="onchange"
+				filterMatchMode="contains" headerText="#{msgs.itemQuantity}">
+				<p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{singleItem.quantity}" /></f:facet>
+                  <f:facet name="input"><p:inputText id="quantityInput" value="#{singleItem.quantity}" style="width:96%"/></f:facet>
+              	</p:cellEditor>
+			</p:column>
+			<p:column>
+				<h:commandButton value="#{msgs.remove}"
+					action="#{viewStockManager.removeItem(singleItem)}">
+				</h:commandButton>
+				<h:commandButton value="#{msgs.save}"
+					action="#{viewStockManager.saveItem(singleItem)}">
+				</h:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
