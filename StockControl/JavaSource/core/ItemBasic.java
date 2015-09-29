@@ -5,16 +5,18 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean(name="item")
 @SessionScoped
-public class Item {
+public class ItemBasic implements ItemAdapter{
 	private String name;
 	private int quantity;
 	private int identifier;
 	private String category;
 
-	public Item() {
+	public ItemBasic() {
+		super();
+		this.identifier = 0;
 	}
-
-	public Item(String name, String category, int quantity) {
+	
+	public ItemBasic(String name, String category, int quantity) {
 		super();
 		this.name = name;
 		this.quantity = quantity;

@@ -42,8 +42,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
-import core.Item;
+import core.ItemBasic;
+import core.ItemAdapter;
 import core.persistence.PersistentDataManagerAdapter;
 
 /**
@@ -51,12 +53,14 @@ import core.persistence.PersistentDataManagerAdapter;
  * @subAuthor Name <e-mail>
  * @author Judah Holanda Correia Lima <judahholanda7@gmail.com>
  */
+
 public class Database implements Serializable, PersistentDataManagerAdapter{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1901029637341078471L;
+	
 	protected String url;
 	protected String port;
 	protected String name;
@@ -66,6 +70,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 	protected Statement statement;
 	protected ResultSet resultSet;
 
+//	@Inject
 	public Database(String url, int port, String name, String user, String password) {
 		this.url = url;
 		this.port = Integer.toString(port);
@@ -109,7 +114,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 		return resultSet;
 	}
 
-	public void updateItem(Item item){
+	public void updateItem(ItemAdapter item){
 		String dbUrl = "jdbc:mysql://" + this.url + ":" + this.port + "/" + this.name + "?user=" + this.user + "&password=" + this.password;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -124,9 +129,9 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 		}
 	}
 
-	public ArrayList<Item> getItemList() {
+	public List<ItemAdapter> getItemList() {
 		String dbUrl = "jdbc:mysql://" + this.url + ":" + this.port + "/" + this.name + "?user=" + this.user + "&password=" + this.password;
-		ArrayList<Item> item = new ArrayList<>();
+		ArrayList<ItemAdapter> item = new ArrayList<>();
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			connection = DriverManager.getConnection(dbUrl);
@@ -140,7 +145,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 				String name = resultSet.getString("varchar50Name");
 				String category = resultSet.getString("varchar50Category");
 				int quantity = resultSet.getInt("intQuantity");
-				Item itemA= new Item(name, category, quantity);
+				ItemBasic itemA= new ItemBasic(name, category, quantity);
 				itemA.setIdentifier(identifier);
 				item.add(itemA);
 			}
@@ -150,7 +155,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 		return item;
 	}
 
-	public void insertItem(Item item) {
+	public void insertItem(ItemAdapter item) {
 		String dbUrl = "jdbc:mysql://" + this.url + ":" + this.port + "/" + this.name + "?user=" + this.user + "&password=" + this.password;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -158,7 +163,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 			statement = connection.createStatement();
 			String query = "INSERT INTO StockControl.TableItem (`varchar50Name`,`varchar50Category`,`intQuantity`) VALUES ('" + item.getName() + "','" + item.getCategory() + "','" + item.getQuantity() + "');";
 			System.out.println(query);
-			statement.executeUpdate(query, statement.RETURN_GENERATED_KEYS);
+			statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
 			ResultSet rs = statement.getGeneratedKeys();  
 			rs.next();  
 			item.setIdentifier((int) rs.getLong(1));
@@ -167,7 +172,7 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 		}
 	}
 
-	public void removeItem(Item item) {
+	public void removeItem(ItemAdapter item) {
 		String dbUrl = "jdbc:mysql://" + this.url + ":" + this.port + "/" + this.name + "?user=" + this.user + "&password=" + this.password;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

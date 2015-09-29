@@ -7,7 +7,7 @@
 <ui:define name="pageTitle">Gerenciador</ui:define>
 <ui:define name="pageHeader">Gerenciador</ui:define>
 <h:head></h:head>
-<h:body>
+<h:body onload="#{viewStockManager.updateData()}">
 	<h:form id="formManager">
 
 		<p:dataTable value="#{viewStockManager.stock.item}" var="singleItem" editable="true" editMode="cell">
@@ -28,7 +28,16 @@
 					value="#{item.quantity}" />
 				<h:commandButton type="submit" value="#{msgs.itemSubmit}"
 					action="#{viewStockManager.addItem(item.name,item.category,item.quantity)}" />
+				<h:commandButton value="#{msgs.refresh}"
+					action="#{viewStockManager.updateData()}" />
 			</f:facet>
+			<p:column filterBy="#{singleItem.identifier}" filterEvent="onchange"
+				filterMatchMode="contains" headerText="#{msgs.itemIdentifier}">
+				<p:cellEditor>
+                  <f:facet name="output"><h:outputText value="#{singleItem.identifier}" /></f:facet>
+                  <f:facet name="input"><p:inputText id="nameIdentifier" value="#{singleItem.identifier}" style="width:96%"/></f:facet>
+              	</p:cellEditor>
+			</p:column>
 			<p:column filterBy="#{singleItem.name}" filterEvent="onchange"
 				filterMatchMode="contains" headerText="#{msgs.itemName}">
 				<p:cellEditor>

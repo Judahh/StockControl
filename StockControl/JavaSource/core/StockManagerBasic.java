@@ -1,33 +1,30 @@
 package core;
 
 import core.persistence.PersistentDataManagerAdapter;
-import core.persistence.database.DatabaseStockControl;
 
-public class StockManager {
-	private Stock stock;
+public class StockManagerBasic implements StockManagerAdapter{
+	private StockAdapter stock;
 	private PersistentDataManagerAdapter persistentDataManagerAdapter;
-
-	public StockManager() {
-		stock=new Stock();
-		persistentDataManagerAdapter = new DatabaseStockControl();
-		addItem("nameFasdf", "categoryFassdfsdff", 0);
+	
+	public StockManagerBasic(StockAdapter stock, PersistentDataManagerAdapter persistentDataManager) {
+		this.stock=stock;
+		this.persistentDataManagerAdapter=persistentDataManager;
 	}
 	
-	public Stock getStock() {
-		//updateData();
+	public StockAdapter getStock() {
 		return stock;
 	}
 
-	public void setStock(Stock stock) {
+	public void setStock(StockAdapter stock) {
 		persistentDataManagerAdapter.clearItemList();
-		for (Item item : stock.getItem()) {
+		for (ItemAdapter item : stock.getItem()) {
 			persistentDataManagerAdapter.insertItem(item);
 		}
 		updateData();
 	}
 	
 	public void addItem(String name,String category, int quantity) {
-		Item item =new Item(name, category, quantity);
+		ItemAdapter item =new ItemBasic(name, category, quantity);
 		persistentDataManagerAdapter.insertItem(item);
 		updateData();
 	}
@@ -36,17 +33,17 @@ public class StockManager {
 		stock.setItem(persistentDataManagerAdapter.getItemList());
 	}
 	
-	public void addItem(Item item) {
+	public void addItem(ItemAdapter item) {
 		persistentDataManagerAdapter.insertItem(item);
 		updateData();
 	}
 	
-	public void removeItem(Item item) {
+	public void removeItem(ItemAdapter item) {
 		persistentDataManagerAdapter.removeItem(item);
 		updateData();
 	}
 	
-	public void saveItem(Item item) {
+	public void saveItem(ItemAdapter item) {
 		persistentDataManagerAdapter.updateItem(item);
 		updateData();
 	}

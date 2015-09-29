@@ -1,17 +1,17 @@
 package core.persistence;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import core.Item;
+import core.ItemAdapter;
 
 public interface PersistentDataManagerAdapter {
-	public void updateItem(Item item);
+	public void updateItem(ItemAdapter item);
 
-	public ArrayList<Item> getItemList();
+	public List<ItemAdapter> getItemList();
 	
 	public void clearItemList();
 
-	public void insertItem(Item item);
+	public void insertItem(ItemAdapter item);
 
-	public void removeItem(Item item);
+	public void removeItem(ItemAdapter item);
 }

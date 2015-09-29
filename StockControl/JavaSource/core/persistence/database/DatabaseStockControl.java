@@ -35,19 +35,22 @@
  */
 package core.persistence.database;
 
+import javax.enterprise.inject.Default;
+
 /**
  *
  * @subAuthor Name <e-mail>
  * @author Judah Holanda Correia Lima <judahholanda7@gmail.com>
  */
+@Default
 public class DatabaseStockControl extends Database {
 
-   /**
+	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -7760584885663342339L;
 
-public DatabaseStockControl() {
-      super("localhost", 3307, "StockControl", "root", "541236987");
-   }
+	public DatabaseStockControl() {
+		super("localhost", 3307, "StockControl", "root", "541236987");
+	}
 }
