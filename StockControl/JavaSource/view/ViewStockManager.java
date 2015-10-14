@@ -1,17 +1,15 @@
 package view;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
 
 import core.ItemBasic;
 import core.StockBasic;
 import core.StockAdapter;
 import core.StockManagerAdapter;
-import core.StockManagerBasic;
-import core.persistence.database.DatabaseStockControl;
 
 @ManagedBean(name="viewStockManager")
 @ViewScoped
@@ -24,11 +22,11 @@ public class ViewStockManager implements Serializable{
 	 * 
 	 */
 
-	private StockManagerAdapter stockManager;
+	@Inject private StockManagerAdapter stockManager;
 
 	public ViewStockManager() {
-		
-		this.stockManager=new StockManagerBasic(new StockBasic(new ArrayList<>()), new DatabaseStockControl());
+		super();
+//		this.stockManager=new StockManagerBasic(new StockBasic(new ArrayList<>()), new DatabaseStockControl());
 	}
 	
 	public StockAdapter getStock() {

@@ -1,10 +1,26 @@
 package core;
 
-import core.persistence.PersistentDataManagerAdapter;
+import java.util.ArrayList;
 
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Model;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import core.persistence.PersistentDataManagerAdapter;
+import core.persistence.database.DatabaseStockControl;
+
+@Default
+@Model
+@Named
 public class StockManagerBasic implements StockManagerAdapter{
 	private StockAdapter stock;
 	private PersistentDataManagerAdapter persistentDataManagerAdapter;
+	
+	public StockManagerBasic() {
+		this.stock=new StockBasic(new ArrayList<>());
+		this.persistentDataManagerAdapter=new DatabaseStockControl();
+	}
 	
 	public StockManagerBasic(StockAdapter stock, PersistentDataManagerAdapter persistentDataManager) {
 		this.stock=stock;
