@@ -43,7 +43,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import core.ItemBasic;
 import core.ItemAdapter;
 import core.persistence.PersistentDataManagerAdapter;
@@ -53,6 +52,7 @@ import core.persistence.PersistentDataManagerAdapter;
  * @subAuthor Name <e-mail>
  * @author Judah Holanda Correia Lima <judahholanda7@gmail.com>
  */
+
 public class Database implements Serializable, PersistentDataManagerAdapter{
 
 	private static final long serialVersionUID = 1901029637341078471L;
@@ -66,6 +66,8 @@ public class Database implements Serializable, PersistentDataManagerAdapter{
 	protected Statement statement;
 	protected ResultSet resultSet;
 
+	public Database(){}
+	
 	public Database(String url, int port, String name, String user, String password) {
 		this.url = url;
 		this.port = Integer.toString(port);

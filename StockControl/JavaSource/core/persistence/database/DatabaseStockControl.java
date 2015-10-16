@@ -37,6 +37,8 @@ package core.persistence.database;
 
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Model;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Named;
 
 /**
@@ -44,6 +46,12 @@ import javax.inject.Named;
  * @subAuthor Name <e-mail>
  * @author Judah Holanda Correia Lima <judahholanda7@gmail.com>
  */
+@Default
+@ManagedBean(name="databaseStockControl")
+//@Produces
+@SessionScoped
+@Model
+@Named("DatabaseStockControl")
 public class DatabaseStockControl extends Database {
 	private static final long serialVersionUID = -7760584885663342339L;
 

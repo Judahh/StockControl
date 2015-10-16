@@ -1,25 +1,22 @@
 package core;
 
-import java.util.ArrayList;
-
 import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import core.persistence.PersistentDataManagerAdapter;
-import core.persistence.database.DatabaseStockControl;
 
 @Default
 @Model
 @Named
 public class StockManagerBasic implements StockManagerAdapter{
-	private StockAdapter stock;
-	private PersistentDataManagerAdapter persistentDataManagerAdapter;
+	@Inject private StockAdapter stock;
+	@Inject @Named("DatabaseStockControl") private PersistentDataManagerAdapter persistentDataManagerAdapter;
 	
 	public StockManagerBasic() {
-		this.stock=new StockBasic(new ArrayList<>());
-		this.persistentDataManagerAdapter=new DatabaseStockControl();
+//		this.stock=new StockBasic(new ArrayList<>());
+//		this.persistentDataManagerAdapter=new DatabaseStockControl();
 	}
 	
 	public StockManagerBasic(StockAdapter stock, PersistentDataManagerAdapter persistentDataManager) {
@@ -56,6 +53,7 @@ public class StockManagerBasic implements StockManagerAdapter{
 	
 	public void removeItem(ItemAdapter item) {
 		persistentDataManagerAdapter.removeItem(item);
+//		System.out.println("REMOVEEEEE");
 		updateData();
 	}
 	

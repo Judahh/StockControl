@@ -55,5 +55,6 @@ public class ViewStockManager implements Serializable{
 	
 	public void saveItem(ItemBasic item) {
 		stockManager.saveItem(item);
+		System.out.println("SAVE KCT");
 	}
 }
