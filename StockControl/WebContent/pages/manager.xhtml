@@ -7,7 +7,7 @@
 <ui:define name="pageTitle">Gerenciador</ui:define>
 <ui:define name="pageHeader">Gerenciador</ui:define>
 <h:head></h:head>
-<h:body> onload="#{viewStockManager.updateData()}">
+<h:body onload="#{viewStockManager.updateData()}">
 	<h:form id="formManager">
 		<p:dataTable value="#{viewStockManager.stock.item}" var="singleItem" editable="true" editMode="cell">
 			<f:facet name="header">
@@ -27,7 +27,7 @@
 					value="#{item.quantity}" />
 				<h:commandButton type="submit" value="#{msgs.itemSubmit}"
 					action="#{viewStockManager.addItem(item.name,item.category,item.quantity)}" />
-				<h:commandButton value="#{msgs.refresh}"
+				<h:commandButton type="submit" value="#{msgs.refresh}"
 					action="#{viewStockManager.updateData()}" />
 			</f:facet>
 			<p:column filterBy="#{singleItem.identifier}" filterEvent="onchange"
@@ -59,12 +59,10 @@
               	</p:cellEditor>
 			</p:column>
 			<p:column>
-				<h:commandButton value="#{msgs.remove}"
-					action="#{viewStockManager.removeItem(singleItem)}">
-				</h:commandButton>
-				<h:commandButton value="#{msgs.save}"
-					action="#{viewStockManager.saveItem(singleItem)}">
-				</h:commandButton>
+				<h:commandButton type="submit" value="#{msgs.remove}"
+					action="#{viewStockManager.removeItem(singleItem)}" /><!-- Por algum motivo o xhtml nao entra nesse metodo -->
+				<h:commandButton type="submit" value="#{msgs.save}"
+					action="#{viewStockManager.saveItem(singleItem)}" /><!-- Por algum motivo o xhtml nao entra nesse metodo -->
 			</p:column>
 		</p:dataTable>
 	</h:form>

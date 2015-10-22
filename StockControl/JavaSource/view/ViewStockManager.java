@@ -49,12 +49,13 @@ public class ViewStockManager implements Serializable{
 		stockManager.addItem(item);
 	}
 	
-	public void removeItem(ItemBasic item) {
+	public void removeItem(ItemBasic item) {//Por algum motivo o xhtml nao entra aqui
+		System.out.println("REMOVE KCT");
 		stockManager.removeItem(item);
 	}
 	
-	public void saveItem(ItemBasic item) {
-		stockManager.saveItem(item);
+	public void saveItem(ItemBasic item) {//Por algum motivo o xhtml nao entra aqui
 		System.out.println("SAVE KCT");
+		stockManager.saveItem(item);
 	}
 }
