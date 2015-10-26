@@ -2,6 +2,7 @@ package view;
 
 import java.io.Serializable;
 
+import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
@@ -23,6 +24,12 @@ public class ViewStockManager implements Serializable{
 	 */
 
 	@Inject private StockManagerAdapter stockManager;
+	
+	@PostConstruct
+	public void postConstruct() {
+		updateData();
+	}
+
 
 	public ViewStockManager() {
 		super();
