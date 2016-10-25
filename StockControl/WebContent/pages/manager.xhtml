@@ -7,7 +7,7 @@
 <ui:define name="pageTitle">Gerenciador</ui:define>
 <ui:define name="pageHeader">Gerenciador</ui:define>
 <h:head></h:head>
-<h:body ><!-- onload="#{viewStockManager.updateData()}"> -->
+<h:body>
 	<h:form id="formManager">
 		<p:dataTable id="datatable" value="#{viewStockManager.stock.item}" var="singleItem" editable="true" editMode="cell">
 			<f:facet name="header">
@@ -59,14 +59,10 @@
               	</p:cellEditor>
 			</p:column>
 			<p:column>
-				<p:commandLink styleClass="ui-icon ui-icon-trash" value="#{msgs.remove}" action="#{viewStockManager.removeItem(singleItem)}" update="datatable">
+				<p:commandLink styleClass="ui-icon ui-icon-trash" value="Excluir" action="#{viewStockManager.removeItem(singleItem)}" update="datatable">
 				</p:commandLink>
-				<!-- <p:commandLink styleClass="ui-icon ui-icon-trash" value="#{msgs.save}" action="#{viewStockManager.saveItem(singleItem)}" update="datatable">
-				</p:commandLink> -->
-				<!-- <h:commandButton type="submit" value="#{msgs.remove}"
-					action="#{viewStockManager.removeItem(singleItem)}" />Por algum motivo o xhtml nao entra nesse metodo
-				<h:commandButton type="submit" value="#{msgs.save}"
-					action="#{viewStockManager.saveItem(singleItem)}" />Por algum motivo o xhtml nao entra nesse metodo -->
+				<p:commandLink styleClass="ui-icon ui-icon-disk" value="Salvar" action="#{viewStockManager.saveItem(singleItem)}" update="datatable">
+				</p:commandLink>
 			</p:column>
 		</p:dataTable>
 	</h:form>

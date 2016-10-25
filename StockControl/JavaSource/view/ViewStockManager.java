@@ -58,7 +58,8 @@ public class ViewStockManager implements Serializable{
 	
 	public void removeItem(ItemBasic item) {//Por algum motivo o xhtml nao entra aqui
 		System.out.println("REMOVE KCT");
-		stockManager.removeItem(item);
+		updateData();
+//		stockManager.removeItem(item);
 	}
 	
 	public void saveItem(ItemBasic item) {//Por algum motivo o xhtml nao entra aqui
